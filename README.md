@@ -1,19 +1,24 @@
 Toy Robot Simulator
 ==========================
+ ```
  Y cooordinate
-       ^
-       |
-       |
-       |
-       +-------> X coordinate
+ ^
+ |
+ |
+ |
+ +-------> X coordinate
 
-        W
-        |
-        |
-   S----+-----N
-        |
-        |
-        E     
+      W
+      |
+      |
+ S----+-----N
+      |
+      |
+      E     
+```      
+## Setup 
+  bundle install
+ 
 ## Run the code
   ruby main.rb
 ## Run the spec
