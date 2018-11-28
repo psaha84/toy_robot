@@ -1,7 +1,8 @@
 class Robot
-  attr_reader :position
+  attr_reader :position, :table
 
-  def initialize
+  def initialize(table)
+    @table = table
   end
 
   def placed(position)
@@ -12,7 +13,7 @@ class Robot
     position.get_output 
   end
 
-  def move(table)
+  def move
     x = position.pos_x
     y = position.pos_y
     orientation = position.orientation
@@ -28,21 +29,27 @@ class Robot
         y -= 1
     end
 
-    new_position = Position.new(x, y, orientation)
-    @position = new_position if table.is_valid_position?(new_position)
+    set_position(x, y, orientation)
   end 
 
   def left
-    x = position.pos_x
-    y = position.pos_y
     orientation = position.get_new_orientation("left")
-    @position = Position.new(x, y, orientation)
+    set_position(position.pos_x, position.pos_y, orientation)
   end
 
   def right
-    x = position.pos_x
-    y = position.pos_y
     orientation = position.get_new_orientation("right")
-    @position = Position.new(x, y, orientation)
+    set_position(position.pos_x, position.pos_y, orientation)
   end 
+
+  def placed?
+    !!position
+  end
+
+  private
+
+  def set_position(x, y, orientation)
+    new_position = Position.new(table, x, y, orientation)
+    @position = new_position if new_position.valid?
+  end
 end
